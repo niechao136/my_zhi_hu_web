@@ -1,15 +1,12 @@
-'use client'
+// 'use client'
+import type { Metadata } from 'next'
 
-import { useRouter } from 'next/navigation'
-import { getToken, initToken } from '@/stores'
+export const metadata: Metadata = {
+  title: "Home",
+  description: "My ZhiHu Web",
+}
 
-export default function Page() {
-  initToken();
-  const token = getToken();
-  const { push } = useRouter()
-  if (!token) {
-    push('/login')
-  }
+export default function Index() {
   return (
     <div>Index</div>
   )
