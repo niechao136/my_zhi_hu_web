@@ -31,7 +31,7 @@ export default function Login() {
   }
   const loginSubmit = async () => {
     startLoading('login')
-    const res = await post({ url: '/auth/login', data: { username, password } })
+    const res = await post({ url: 'auth/login', data: { username, password } })
     if (res?.data?.status === 200) {
       if (remember) {
         setLocal(LOCAL.REMEMBER, 'true')
