@@ -7,7 +7,7 @@ import { useEffect, useState } from'react'
 import { post } from '@/api'
 import { setToken, startLoading, stopLoading } from '@/stores'
 import style from '@/styles/login.module.css'
-import { getLocal, setLocal, rmLocal, LOCAL, AES_KEY, aesDecrypt, aesEncrypt } from '@/utils'
+import { getLocal, setLocal, rmLocal, LOCAL, AES_KEY, aesDecrypt, aesEncrypt, md5Encrypt } from '@/utils'
 
 type LoginForm = {
   username?: string,
@@ -31,7 +31,10 @@ export default function Login() {
   }
   const loginSubmit = async () => {
     startLoading('login')
-    const res = await post({ url: 'auth/login', data: { username, password } })
+    const res = await post({
+      url: 'auth/login',
+      data: { username, password: md5Encrypt(password) }
+    })
     if (res?.data?.status === 200) {
       if (remember) {
         setLocal(LOCAL.REMEMBER, 'true')
@@ -79,7 +82,7 @@ export default function Login() {
         />
         <div className={style.check}>
           <Checkbox
-            defaultChecked={remember}
+            checked={remember}
             onChange={checkChange}>
             记住密码
           </Checkbox>

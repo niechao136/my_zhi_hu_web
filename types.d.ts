@@ -15,3 +15,11 @@ declare namespace Result {
     total?: number
   }
 }
+
+declare namespace User {
+  type Info = {
+    id?: number
+    username?: string
+    nickname?: string
+  }
+}
