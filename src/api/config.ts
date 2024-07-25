@@ -14,7 +14,6 @@ const service = axios.create(config)
 const not_need_token: string[] = [
   'server/info',
   'auth/login',
-  'user/info',
 ]
 
 service.interceptors.request.use(config => {

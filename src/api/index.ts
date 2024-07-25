@@ -11,5 +11,5 @@ type PostOption<T> = {
 export const post = <T = Result.Msg, V = any>(option: PostOption<V>): Promise<AxiosResponse<T>> => {
   const { url, data, config, base } = option
   const query = (base ?? 'api/') + url
-  return request.post<T, AxiosResponse<T>, V>(query, data, config)
+  return request.post<T, AxiosResponse<T>, V>(query, (data ?? {}) as any, config)
 }

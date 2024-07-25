@@ -70,13 +70,13 @@ export default function Login() {
       <div className={style.area}>
         <Input
           prefix={<UserOutlined/>}
-          defaultValue={username}
+          value={username}
           onChange={usernameChange}
           placeholder={'用户名: admin or user'}
         />
         <Input.Password
           prefix={<LockOutlined/>}
-          defaultValue={password}
+          value={password}
           onChange={passwordChange}
           placeholder={'密码: abc123'}
         />
