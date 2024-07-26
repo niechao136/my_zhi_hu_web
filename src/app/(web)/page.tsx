@@ -1,12 +1,6 @@
-// 'use client'
-import type { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: "Home",
-  description: "My ZhiHu Web",
-}
-
-export default function Index() {
+export default function Home() {
   return (
     <div>Index</div>
   )
