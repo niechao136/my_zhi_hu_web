@@ -1,0 +1,14 @@
+services:
+  my_zhi_hu_web:
+    image: my_zhi_hu_web
+    container_name: my_zhi_hu_web
+    user: root
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+
