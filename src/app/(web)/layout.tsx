@@ -50,7 +50,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
         stopLoading('layout')
       })
     }
-  }, [push])
+  }, [])
   return (
     <div>
       <Menu onClick={onClick} selectedKeys={[current]} mode={'horizontal'} items={menu}/>

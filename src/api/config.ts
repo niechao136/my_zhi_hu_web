@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { Modal } from 'antd'
 import { getToken } from '@/stores'
 
 const config: AxiosRequestConfig = {
@@ -18,13 +19,27 @@ const not_need_token: string[] = [
 
 service.interceptors.request.use(config => {
   if (!not_need_token.find(s => config.url?.endsWith(s))) {
-    config.headers.Authorization = 'Bearer ' + getToken()
+    config.headers.Authorization = getToken()
   }
   return config
 }, err => {})
 
-service.interceptors.response.use(response => {
-  console.log(response)
+service.interceptors.response.use((response: AxiosResponse<Result.Base>) => {
+  if (response.data?.status === 400) {
+    location.href = '/login'
+    return Promise.reject(response.data)
+  } else if (response.data?.status === 401) {
+    Modal.warn({
+      title: '用户异常',
+      content: '用户已登出，请重新登录',
+      okText: '回到登录页',
+      cancelText: '',
+      onOk() {
+        location.href = '/login'
+      }
+    })
+    return Promise.reject(response.data)
+  }
   return response
 }, err => {})
 
