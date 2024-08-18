@@ -22,4 +22,12 @@ declare namespace User {
     username?: string
     nickname?: string
   }
+  type Register = {
+    username?: string
+    password?: string
+    role?: number
+    nickname?: string
+    email?: string
+    phone?: string
+  }
 }

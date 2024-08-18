@@ -3,8 +3,8 @@ import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getToken, initToken, startLoading, stopLoading } from '@/stores'
-import React, { useEffect, useState } from 'react'
+import { getToken, initToken, setOwner, startLoading, stopLoading } from '@/stores'
+import React, { useEffect, useState, useRef } from 'react'
 import { post } from '@/api'
 
 type MenuItem = Required<MenuProps>['items'][number]
@@ -29,15 +29,21 @@ const menu: MenuItem[] = [
 ]
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode; }>) {
-  startLoading('layout')
   const [current, setCurrent] = useState('home')
+  const flag = useRef(true)
   const { push } = useRouter()
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key)
   }
   useEffect(() => {
+    if (flag.current) {
+      flag.current = false
+      return
+    }
+    startLoading('layout')
     initToken();
     const token = getToken();
+    console.log(token)
     if (!token) {
       push('/login')
       stopLoading('layout')
@@ -46,14 +52,16 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
         const res = await post<Result.Msg<User.Info>>({
           url: 'user/info',
         })
-        console.log(res)
+        setOwner(res?.data?.data ?? {})
         stopLoading('layout')
       })
     }
-  }, [])
+  }, [push])
   return (
     <div>
-      <Menu onClick={onClick} selectedKeys={[current]} mode={'horizontal'} items={menu}/>
+      <header>
+        <Menu onClick={onClick} selectedKeys={[current]} mode={'horizontal'} items={menu}/>
+      </header>
       <div>{children}</div>
     </div>
   )

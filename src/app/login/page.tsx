@@ -48,6 +48,9 @@ export default function Login() {
     }
     stopLoading('login')
   }
+  const linkToRegister = () => {
+    push('/register')
+  }
   useEffect(() => {
     const remember = getLocal(LOCAL.REMEMBER)
     let login: LoginForm = {}
@@ -87,14 +90,15 @@ export default function Login() {
             记住密码
           </Checkbox>
           <Button
-            type={'link'}>
-            忘记密码
+            type={'link'}
+            onClick={linkToRegister}>
+            注册
           </Button>
         </div>
         <Button
           type={'primary'}
           onClick={loginSubmit}>
-          登录
+          登入
         </Button>
       </div>
     </div>

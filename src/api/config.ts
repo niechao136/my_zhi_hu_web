@@ -15,6 +15,7 @@ const service = axios.create(config)
 const not_need_token: string[] = [
   'server/info',
   'auth/login',
+  'user/register',
 ]
 
 service.interceptors.request.use(config => {
@@ -31,8 +32,8 @@ service.interceptors.response.use((response: AxiosResponse<Result.Base>) => {
   } else if (response.data?.status === 401) {
     Modal.warn({
       title: '用户异常',
-      content: '用户已登出，请重新登录',
-      okText: '回到登录页',
+      content: '用户已登出，请重新登入',
+      okText: '回到登入页',
       cancelText: '',
       onOk() {
         location.href = '/login'
