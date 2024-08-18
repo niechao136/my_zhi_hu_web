@@ -3,16 +3,16 @@
 import { useEffect, useRef } from 'react'
 import { setMenu } from '@/stores'
 
-export default function Ranking() {
+export default function My() {
   const flag = useRef(true)
   useEffect(() => {
     if (flag.current) {
       flag.current = false
       return
     }
-    setMenu('ranking')
+    setMenu('')
   }, [])
   return (
-    <div>Ranking</div>
+    <div>My</div>
   )
 }

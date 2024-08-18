@@ -15,3 +15,10 @@ export const stopLoading = (key: string) => {
 export const closeLoading = () => {
   loading_array$.next([])
 }
+
+export const menu$: Rx.BehaviorSubject<string> = new Rx.BehaviorSubject('home')
+
+export const setMenu = (key: string) => {
+  const old = menu$.getValue()
+  if (old !== key) menu$.next(key)
+}
