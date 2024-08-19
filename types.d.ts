@@ -31,3 +31,21 @@ declare namespace User {
     phone?: string
   }
 }
+
+declare namespace Question {
+  type Add = {
+    title?: string
+    content?: string
+  }
+  type Info = {
+    title?: string
+    content?: string
+    id?: number
+    owner_id?: number
+    answers?: number[]
+    watching?: number[]
+    create_at?: string
+    update_at?: string
+    user?: User.Info
+  }
+}

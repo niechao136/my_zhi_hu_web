@@ -29,3 +29,10 @@
     display: flex;
     gap: 16px;
 }
+
+.add {
+    width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
