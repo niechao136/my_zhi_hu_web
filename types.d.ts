@@ -10,7 +10,7 @@ declare namespace Result {
   }
   type Page<T = string> = Base & {
     page?: number
-    row?: T[]
+    data?: T[]
     size?: number
     total?: number
   }
