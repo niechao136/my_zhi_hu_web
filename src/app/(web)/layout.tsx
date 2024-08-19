@@ -86,7 +86,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
     </div>
   )
   useEffect(() => {
-    if (flag.current) {
+    if (flag.current && process.env.NEXT_PUBLIC_APP_ENV === 'development') {
       flag.current = false
       return
     }

@@ -10,7 +10,7 @@ export default function Ranking() {
   const flag = useRef(true)
   const [ranking, setRanking] = useState<Question.Info[]>([])
   useEffect(() => {
-    if (flag.current) {
+    if (flag.current && process.env.NEXT_PUBLIC_APP_ENV === 'development') {
       flag.current = false
       return
     }
