@@ -18,11 +18,3 @@ COPY --from=build /app/package.json ./package.json
 EXPOSE 3000
 ENV PORT 3000
 CMD ["node_modules/.bin/next", "start"]
-
-FROM nginx:alpine
-#COPY --from=build /app/out /usr/share/nginx/html
-COPY public/ssl /etc/nginx/ssl
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-EXPOSE 443
-ENTRYPOINT nginx -g "daemon off;"
